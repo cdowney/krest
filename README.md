@@ -2,6 +2,8 @@
 An example of using Kotlin with Spring boot to create a simple RESTful API. The API handles blog post resources, that allows 
 creating/reading/updating/deleting simple blog posts.
 
+[![Build Status](https://travis-ci.org/cdowney/krest.svg?branch=master)](https://travis-ci.org/cdowney/badges)
+
 # Building
 To build run `./gradelw clean build`
 
