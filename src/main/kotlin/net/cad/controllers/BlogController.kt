@@ -24,6 +24,13 @@ class BlogController {
         return blogPostRepository.findOne(id);
     }
 
+    @RequestMapping("/blogpost/{id}", method = arrayOf(RequestMethod.PATCH))
+    fun updateBlogPost(@PathVariable id: UUID, @RequestBody content: String) {
+        var post = blogPostRepository.findOne(id);
+        var updatedPost = BlogPost(post.id, post.postDateTime, content);
+        blogPostRepository.save(updatedPost);
+    }
+
     @RequestMapping("/blogpost/{id}", method = arrayOf(RequestMethod.DELETE))
     fun deleteBlogPost(@PathVariable id: UUID) {
         blogPostRepository.delete(id);
