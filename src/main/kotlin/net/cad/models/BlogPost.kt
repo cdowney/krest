@@ -14,9 +14,9 @@ data class BlogPost(
         @GeneratedValue(generator = "uuid")
         @GenericGenerator(name = "uuid", strategy = "uuid2")
         @Type(type = "uuid-char")
-        val id: UUID = UUID.randomUUID(),
+        var id: UUID? = null,
 
-        val postDateTime: LocalDateTime = LocalDateTime.now(),
+        var postDateTime: LocalDateTime = LocalDateTime.now(),
 
-        val content: String = ""
+        var content: String = ""
 )

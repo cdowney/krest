@@ -15,31 +15,21 @@ class BlogController {
     lateinit private var blogPostRepository: BlogPostRepository;
 
     @RequestMapping("/blogposts", method = arrayOf(RequestMethod.GET))
-    fun getBlogPosts(): MutableIterable<BlogPost> {
-        return blogPostRepository.findAll()
-    }
+    fun getBlogPosts() = blogPostRepository.findAll()
 
     @RequestMapping("/blogpost/{id}", method = arrayOf(RequestMethod.GET))
-    fun getBlogPost(@PathVariable id: UUID): BlogPost {
-        return blogPostRepository.findOne(id);
-    }
+    fun getBlogPost(@PathVariable id: UUID) = blogPostRepository.findOne(id);
 
     @RequestMapping("/blogpost/{id}", method = arrayOf(RequestMethod.PATCH))
     fun updateBlogPost(@PathVariable id: UUID, @RequestBody content: String) {
         var post = blogPostRepository.findOne(id);
-        var updatedPost = BlogPost(post.id, post.postDateTime, content);
-        blogPostRepository.save(updatedPost);
+        post.content = content
+        blogPostRepository.save(post);
     }
 
     @RequestMapping("/blogpost/{id}", method = arrayOf(RequestMethod.DELETE))
-    fun deleteBlogPost(@PathVariable id: UUID) {
-        blogPostRepository.delete(id);
-    }
+    fun deleteBlogPost(@PathVariable id: UUID) = blogPostRepository.delete(id);
 
     @RequestMapping(value = "/blogpost", method = arrayOf(RequestMethod.POST))
-    fun postBlogPost(@RequestBody content: String) {
-        var blogPost: BlogPost = BlogPost(content = content)
-        blogPostRepository.save(blogPost)
-    }
-
+    fun postBlogPost(@RequestBody content: String) = blogPostRepository.save(BlogPost(content = content))
 }
